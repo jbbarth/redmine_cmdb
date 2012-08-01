@@ -1,0 +1,9 @@
+api.array :configuration_items do
+  @configuration_items.each do |configuration_item|
+    api.configuration_item do
+      %w(id name url description item_type cmdb_identifier).each do |field|
+        api.send(field, configuration_item.send(field).to_s)
+      end
+    end
+  end
+end

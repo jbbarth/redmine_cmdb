@@ -1,0 +1,28 @@
+one:
+  id: 1
+  name: srv-app-01
+  item_type: Server
+  cmdb_identifier: server::srv-app-01
+  description: Primary application server
+  url: http://cmdb.host/srv-app-01
+two:
+  id: 2
+  name: srv-app-02
+  item_type: Server
+  cmdb_identifier: server::srv-app-02
+  description: Secondary application server
+  url: http://cmdb.host/srv-app-02
+three:
+  id: 3
+  name: srv-db-01
+  item_type: Server
+  cmdb_identifier: server::srv-db-01
+  description: Primary database server
+  url: http://cmdb.host/srv-db-01
+four:
+  id: 4
+  name: app-01
+  item_type: Application
+  cmdb_identifier: application::app-01
+  description: Our shiny web app!
+  url: http://cmdb.host/app-01

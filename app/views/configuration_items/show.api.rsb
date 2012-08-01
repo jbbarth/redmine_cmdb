@@ -1,0 +1,5 @@
+api.configuration_item do
+  %w(id name url description item_type cmdb_identifier).each do |field|
+    api.send(field, @configuration_item.send(field).to_s)
+  end
+end
