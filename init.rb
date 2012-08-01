@@ -1,5 +1,4 @@
 Redmine::Plugin.register :redmine_cmdb do
-end
   name 'Redmine CMDB plugin'
   description 'This plugin links Redmine with your web-based CMDB'
   author 'Jean-Baptiste BARTH'
