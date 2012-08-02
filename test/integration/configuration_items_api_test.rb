@@ -122,7 +122,7 @@ class ConfigurationItemsApiTest < ActionController::IntegrationTest
   context "DELETE /configuration_items/:id" do
     should "delete the configuration_item" do
       assert_difference('ConfigurationItem.count', -1) do
-        delete '/configuration_items/2.json', {}, credentials('admin')
+        delete '/configuration_items/2.json', {:strategy => 'hard'}, credentials('admin')
       end
       assert_response :ok
       assert_nil ConfigurationItem.find_by_id(2)

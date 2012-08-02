@@ -9,7 +9,7 @@ class ConfigurationItemsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.api { @configuration_items = ConfigurationItem.all }
+      format.api { @configuration_items = self.class.model_object.all }
     end
   end
 
@@ -45,7 +45,7 @@ class ConfigurationItemsController < ApplicationController
   end
 
   def destroy
-    @configuration_item.destroy
+    @configuration_item.destroy(params[:strategy])
     respond_to do |format|
       format.api { head :ok }
     end

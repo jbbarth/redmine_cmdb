@@ -5,6 +5,7 @@ one:
   cmdb_identifier: server::srv-app-01
   description: Primary application server
   url: http://cmdb.host/srv-app-01
+  status: 1
 two:
   id: 2
   name: srv-app-02
@@ -12,6 +13,7 @@ two:
   cmdb_identifier: server::srv-app-02
   description: Secondary application server
   url: http://cmdb.host/srv-app-02
+  status: 1
 three:
   id: 3
   name: srv-db-01
@@ -19,6 +21,7 @@ three:
   cmdb_identifier: server::srv-db-01
   description: Primary database server
   url: http://cmdb.host/srv-db-01
+  status: 1
 four:
   id: 4
   name: app-01
@@ -26,3 +29,12 @@ four:
   cmdb_identifier: application::app-01
   description: Our shiny web app!
   url: http://cmdb.host/app-01
+  status: 1
+five:
+  id: 5
+  name: disabled-01
+  item_type: Application
+  cmdb_identifier: application::disabled-01
+  description: Old web app
+  url: http://cmdb.host/disabled-01
+  status: 9

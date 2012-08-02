@@ -2,10 +2,14 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ConfigurationItemTest < ActiveSupport::TestCase
   should "create a ConfigurationItem object" do
-    assert ! ConfigurationItem.new().valid?
-    assert ! ConfigurationItem.new(:name => "server-01").valid?
-    assert ! ConfigurationItem.new(:url => "http://cmdb.local/server-01").valid?
-    assert   ConfigurationItem.new(:name => "server-01", :url => "http://cmdb.local/server-01").valid?
+    ci = ConfigurationItem.new
+    assert ! ci.valid?
+    ci.name = "server-01"
+    assert ! ci.valid?
+    ci.url = "http://cmdb.local/server-01"
+    assert ci.valid?
+    assert ci.save
+    assert_equal true, ci.reload.active?
   end
 
   context "with valid attributes" do
@@ -34,6 +38,43 @@ class ConfigurationItemTest < ActiveSupport::TestCase
       assert @ci.save
       assert ! ci.save
       assert_equal ["has already been taken"], ci.errors[:cmdb_identifier]
+    end
+
+    context "#active?" do
+      should "follow STATUS_* constants" do
+        @ci.status = 1
+        assert_equal true, @ci.active?
+        @ci.status = 9
+        assert_equal false, @ci.active?
+        @ci.status = 17
+        assert_equal false, @ci.active?
+      end
+    end
+
+    context "#active" do
+      should "return only active CIs" do
+        count = ConfigurationItem.count
+        assert_equal (count - 1), ConfigurationItem.active.count
+        assert ! ConfigurationItem.active.include?(ConfigurationItem.find(5))
+      end
+    end
+
+    context "#destroy" do
+      should "soft destroy by default" do
+        @ci.save
+        assert_difference 'ConfigurationItem.active.count', -1 do
+          assert_no_difference 'ConfigurationItem.count' do
+            @ci.destroy
+          end
+        end
+      end
+
+      should "hard destroy if told" do
+        @ci.save
+        assert_difference 'ConfigurationItem.count', -1 do
+          @ci.destroy('hard')
+        end
+      end
     end
   end
 end
