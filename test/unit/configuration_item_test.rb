@@ -23,6 +23,12 @@ class ConfigurationItemTest < ActiveSupport::TestCase
       assert_equal "server::server-01", ci.reload.cmdb_identifier
     end
 
+    should "not populate #cmdb_identifier if provided" do
+      @ci.cmdb_identifier = "123456"
+      @ci.save
+      assert_equal "123456", @ci.reload.cmdb_identifier
+    end
+
     should "ensure #cmdb_identifier is unique" do
       ci = @ci.dup
       assert @ci.save
