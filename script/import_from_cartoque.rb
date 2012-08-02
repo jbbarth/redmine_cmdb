@@ -132,7 +132,7 @@ cmdb_items.each do |item|
   if redmine_identifiers.include?(item[:cmdb_identifier])
     redmine_item = redmine_items.detect{|i|i[:cmdb_identifier] == item[:cmdb_identifier]}
     raise "Unable to find redmine item with cmdb_identifier=#{item[:cmdb_identifier]} but it shouldn't happen here..." if redmine_item.nil?
-    if item.keys.detect{|key| item[key] != redmine_item[key]}
+    if item.keys.detect{|key| key != :id && item[key] != redmine_item[key]}
       puts "Updating #{item[:item_type]} #{item[:name]}"
       RedmineCMDBImporter.update_item(redmine_item[:id], item)
     end
