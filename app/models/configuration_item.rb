@@ -1,6 +1,8 @@
 class ConfigurationItem < ActiveRecord::Base
   unloadable
 
+  has_many :configuration_item_relations, :dependent => :destroy
+
   validates_presence_of :name, :url
   validates_uniqueness_of :cmdb_identifier
 
