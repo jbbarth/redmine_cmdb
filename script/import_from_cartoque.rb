@@ -18,6 +18,7 @@
 #   * CARTOQUE_URL : the url of your cartoque instance
 #   * CARTOQUE_TOKEN : the token of the chosen user in your cartoque instance ; he will
 #                      only read configuration_items through cartoque's REST API
+#   * CI_TYPES : the CI types you want to synchronize ; defaults to "Application,Server"
 #
 
 require 'rubygems'
@@ -34,17 +35,14 @@ class CMDBExporter
   class << self
     def find_all_configuration_items
       ary = []
-      get('/servers').parsed_response['servers'].map do |item|
-        ary << { name: item['name'],
-                 item_type: 'Server',
-                 url: url_for(:server, item),
-                 cmdb_identifier: item['id'] }
-      end
-      get('/applications').parsed_response['applications'].map do |item|
-        ary << { name: item['name'],
-                 item_type: 'Application',
-                 url: url_for(:application, item),
-                 cmdb_identifier: item['id'] }
+      configuration_item_types.each do |type|
+        plural = "#{type.downcase}s"
+        get("/#{plural}").parsed_response["#{plural}"].map do |item|
+          ary << { name: item['name'],
+                  item_type: type,
+                  url: url_for(plural, item),
+                  cmdb_identifier: item['id'] }
+        end
       end
       ary
     end
@@ -52,6 +50,10 @@ class CMDBExporter
     def url_for(type, item)
       @cmdb_url ||= URI.parse(base_uri)
       @cmdb_url.merge("/#{type}s/#{item['slug'] || item['id']}").to_s
+    end
+
+    def configuration_item_types
+      (ENV['CI_TYPES'] || "Application,Server").strip.split(",")
     end
   end
 end
@@ -73,6 +75,8 @@ class RedmineCMDBImporter
           hsh[(key.to_sym rescue key) || key] = hsh.delete(key)
         end
         hsh
+      end.select do |hsh|
+        configuration_item_types.include?(hsh[:item_type])
       end
     end
 
@@ -88,6 +92,10 @@ class RedmineCMDBImporter
     def update_item(id, attrs)
       res = put("/configuration_items/#{id}.json", body: {configuration_item: attrs})
       puts "  errors importing #{attrs.inspect}: #{res.parsed_response['errors'].join(', ')}" if res.code == 422
+    end
+
+    def configuration_item_types
+      (ENV['CI_TYPES'] || "Application,Server").strip.split(",")
     end
   end
 end
