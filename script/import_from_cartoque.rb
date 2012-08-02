@@ -47,9 +47,9 @@ class CMDBExporter
       ary
     end
 
-    def url_for(type, item)
+    def url_for(plural, item)
       @cmdb_url ||= URI.parse(base_uri)
-      @cmdb_url.merge("/#{type}s/#{item['slug'] || item['id']}").to_s
+      @cmdb_url.merge("/#{plural}/#{item['slug'] || item['id']}").to_s
     end
 
     def configuration_item_types
