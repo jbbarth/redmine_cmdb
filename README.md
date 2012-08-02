@@ -12,6 +12,7 @@ Configuration items are stored in Redmine database with the following attributes
 * **description** : an optional description
 * **item_type** : an optional item type if you have multiple types (for instance "Application" and "Server")
 * **cmdb_identifier** : a *unique* identifier that will guarantee the integrity of your redmine table with your CMDB
+* **status** : an integer to store the status of the CI ; currently can be 'active' (1) or 'archived' (9), results in active=true/false in API results
 
 It's highly recommended to provide a **cmdb_identifier** when creating a CI in the CMDB. If you don't, the plugin will try to build one from the item_type and name fields, but it has drawbacks (for instance renaming a CI won't will be a hard story in your synchronization script).  The **cmdb_identifier** field can be used as a pivot for most synchronization actions in the plugin. It's unique, so it let's you rename CIs, update or delete them without worrying about dirty things in your scripts. I personnally tend to use either a komposite key if my CMDB source is a relational database, or directly the identifier of the record if it's a document-oriented DB with unique identifiers (which is the case in my current DB Cartoque).
 
@@ -29,7 +30,7 @@ These API endpoints work like any Redmine API endpoint, so you have to authentic
 Lists all configuration items. Expected response:
 ```
 {"configuration_items":[{"id":"123","name":"Main Webapp","type":"Application","description":"A shiny application description.",
-                         "url":"http://my.cmdb.host/345", "cmdb_identifier":"application::main-webapp}]}
+                         "url":"http://my.cmdb.host/345", "cmdb_identifier":"application::main-webapp", "active":"true"}]}
 ```
 
 Parameters: none.
@@ -39,7 +40,7 @@ Parameters: none.
 Shows a specific configuration item. Expected response:
 ```
 {"configuration_item":{"id":"123","name":"Main Webapp","type":"Application","description":"A shiny application description.",
-                         "url":"http://my.cmdb.host/345", "cmdb_identifier":"application::main-webapp}}
+                         "url":"http://my.cmdb.host/345", "cmdb_identifier":"application::main-webapp", "active":"true"}}
 ```
 Parameters: none.
 
@@ -54,3 +55,6 @@ Updates an existing configuration item.
 ### DELETE /configuration_items/:id.json
 
 Deletes a configuration item.
+
+Parameters:
+* **strategy** : can be 'soft' (default) or 'hard'. 'soft' softly deletes items, meaning they will stay in the database but be tagged with a status of archived item. 'hard' really deletes the item.

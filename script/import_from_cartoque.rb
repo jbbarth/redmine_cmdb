@@ -121,6 +121,7 @@ end
 cmdb_identifiers = cmdb_items.map{|i|i[:cmdb_identifier]}
 redmine_items.each do |item|
   next if cmdb_identifiers.include?(item[:cmdb_identifier])
+  next if ! item[:active]
   puts "Deleting #{item[:item_type]} #{item[:name]} because it doesn't exist anymore in the CMDB"
   RedmineCMDBImporter.remove_item(item[:id])
 end
@@ -132,7 +133,7 @@ cmdb_items.each do |item|
   if redmine_identifiers.include?(item[:cmdb_identifier])
     redmine_item = redmine_items.detect{|i|i[:cmdb_identifier] == item[:cmdb_identifier]}
     raise "Unable to find redmine item with cmdb_identifier=#{item[:cmdb_identifier]} but it shouldn't happen here..." if redmine_item.nil?
-    if item.keys.detect{|key| key != :id && item[key] != redmine_item[key]}
+    if item.keys.detect{|key| key != :id && key != :status && item[key] != redmine_item[key]}
       puts "Updating #{item[:item_type]} #{item[:name]}"
       RedmineCMDBImporter.update_item(redmine_item[:id], item)
     end
