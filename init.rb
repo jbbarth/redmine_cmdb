@@ -14,4 +14,8 @@ Redmine::Plugin.register :redmine_cmdb do
   url 'https://github.com/jbbarth/redmine_cmdb'
   requires_redmine :version_or_higher => '2.0.0'
   #requires_redmine_plugin :redmine_base_jquery, :version_or_higher => '0.0.1'
+  project_module :cmdb do
+    permission :view_configuration_items, {}
+    permission :manage_configuration_items, {}
+  end
 end

@@ -1,0 +1,5 @@
+en:
+  configuration_items: "Configuration items"
+  project_module_cmdb: "Link with CMDB"
+  permission_view_configuration_items: "View configuration items"
+  permission_manage_configuration_items: "Manage configuration items"

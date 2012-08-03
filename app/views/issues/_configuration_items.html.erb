@@ -1,0 +1,24 @@
+<% if User.current.allowed_to?(:view_configuration_items, @project) %>
+
+  <% items = ConfigurationItem.related_to(@issue) %>
+  <% if items.present? %>
+
+    <div id="configuration_items">
+      <div class=contextual>
+      <!--
+      <% if User.current.allowed_to?(:manage_configuration_items, @project) %>
+        <%= toggle_link l(:button_add), 'new-ci-relation-form', {:focus => 'related_ci_id'} %>
+      <% end %>
+      -->
+      </div>
+
+      <p><strong><%= l(:configuration_items) %></strong></p>
+
+      <% items.each do |item| %>
+        <%= link_to(h(item.name), item.url, :class => 'configuration_item') %>
+      <% end %>
+    </div>
+
+  <% end %>
+
+<% end %>
