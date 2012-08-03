@@ -20,7 +20,7 @@ class ConfigurationItemsApiTest < ActionController::IntegrationTest
       assert_not_nil ci
       assert_equal 'Server', ci['item_type']
       assert_equal %w(id name description url item_type cmdb_identifier active).sort, ci.keys.sort
-      assert_equal 'true', ci['active']
+      assert_equal true, ci['active']
     end
   end
 
@@ -37,7 +37,7 @@ class ConfigurationItemsApiTest < ActionController::IntegrationTest
       assert_equal 'srv-app-01', ci['name']
       assert_equal 'Server', ci['item_type']
       assert_equal %w(id name description url item_type cmdb_identifier active).sort, ci.keys.sort
-      assert_equal 'true', ci['active']
+      assert_equal true, ci['active']
     end
   end
 
