@@ -1,0 +1,6 @@
+.related_configuration_items { margin-bottom:12px; padding:0 12px; }
+.configuration_item {
+  margin:0 2px; padding:3px 6px; border-radius:3px; box-shadow:0 0 4px #ddd;
+  font-family:monospace; background-color:#819fc1; color:#fff !important;
+}
+.configuration_item:hover { text-decoration:none; background-color:#708eb0; }

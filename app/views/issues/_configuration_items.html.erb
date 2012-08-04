@@ -14,11 +14,16 @@
 
       <p><strong><%= l(:configuration_items) %></strong></p>
 
+      <div class="related_configuration_items">
       <% items.each do |item| %>
         <%= link_to(h(item.name), item.url, :class => 'configuration_item') %>
       <% end %>
+      </div>
     </div>
 
+    <% content_for :header_tags do %>
+      <%= stylesheet_link_tag 'style', :plugin => 'redmine_cmdb' %>
+    <% end %>
   <% end %>
 
 <% end %>
