@@ -16,7 +16,7 @@
 
       <div class="related_configuration_items">
       <% items.each do |item| %>
-        <%= link_to(h(item.name), item.url, :class => 'configuration_item') %>
+        <%= link_to_item(item) %>
       <% end %>
       </div>
     </div>

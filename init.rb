@@ -5,6 +5,10 @@
 Rails.application.paths["app/overrides"] ||= []
 Rails.application.paths["app/overrides"] << File.expand_path("../app/overrides", __FILE__)
 
+ActionDispatch::Callbacks.to_prepare do
+  require_dependency 'redmine_cmdb/application_helper_patch'
+end
+
 Redmine::Plugin.register :redmine_cmdb do
   name 'Redmine CMDB plugin'
   description 'This plugin links Redmine with your web-based CMDB'
