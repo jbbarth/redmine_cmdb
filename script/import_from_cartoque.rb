@@ -68,6 +68,7 @@ class RedmineCMDBImporter
   class << self
     def find_all_configuration_items
       res = get('/configuration_items.json')
+      raise "Unauthorized access to Redmine (are you admin?)" if res.code == 403
       raise "Unable to connect to Redmine (invalid credentials)" if res.code == 401
       res.parsed_response['configuration_items'].map do |hsh|
         hsh.keys.each do |key|
