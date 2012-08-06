@@ -1,7 +1,7 @@
 .related_configuration_items { margin-bottom:12px; padding:0 12px; }
 .configuration_item {
   margin:0 2px; padding:2px 0; border-radius:3px; box-shadow:0 0 4px #ddd;
-  font-family:monospace; color:#fff !important;
+  font-family:monospace; font-weight:bold; font-size:12px; color:#fff !important;
 }
 .configuration_item .item { margin:0; padding:2px 5px; background-color:#819fc1; color:#fff !important; border-radius:3px; }
 .configuration_item:hover { text-decoration:none; }
