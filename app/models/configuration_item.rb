@@ -18,6 +18,7 @@ class ConfigurationItem < ActiveRecord::Base
     def related_to(element)
       ConfigurationItemRelation.where(element_type: element.class.to_s, element_id: element.id)
                                .includes(:configuration_item)
+                               .order('configuration_items.name asc')
                                .map(&:configuration_item)
     end
   end

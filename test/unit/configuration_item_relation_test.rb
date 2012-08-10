@@ -21,5 +21,14 @@ class ConfigurationItemRelationTest < ActiveSupport::TestCase
       ConfigurationItemRelation.create!(configuration_item: server, element: issue)
       assert_equal [server], ConfigurationItem.related_to(issue)
     end
+
+    should "return configuration items ordered by name asc" do
+      issue = Issue.find(1)
+      server = ConfigurationItem.find(1)  #srv-app*
+      server2 = ConfigurationItem.find(3) #srv-db*
+      ConfigurationItemRelation.create!(configuration_item: server2, element: issue)
+      ConfigurationItemRelation.create!(configuration_item: server, element: issue)
+      assert_equal [server, server2], ConfigurationItem.related_to(issue)
+    end
   end
 end
