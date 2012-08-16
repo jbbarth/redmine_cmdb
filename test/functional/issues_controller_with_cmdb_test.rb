@@ -23,8 +23,6 @@ class IssuesControllerWithCmdbTest < ActionController::TestCase
   context "no related configuration item" do
     should "not show configuration items section" do
       get :show, :id => 1
-      assert_response :success
-      assert_template 'show'
       assert_equal [], ConfigurationItem.related_to(assigns(:issue))
       assert_no_tag 'strong', :content => 'Configuration items'
       assert_select 'a.configuration_item', false
@@ -34,8 +32,6 @@ class IssuesControllerWithCmdbTest < ActionController::TestCase
   context "with some related configuration items" do
     should "show configuration items section" do
       get :show, :id => 2
-      assert_response :success
-      assert_template 'show'
       assert_tag 'strong', :content => 'Configuration items'
       assert_select 'a.configuration_item', :count => 1, :text => 'srv-app-01'
     end
