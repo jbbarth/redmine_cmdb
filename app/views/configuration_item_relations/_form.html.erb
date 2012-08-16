@@ -1,0 +1,17 @@
+<%= form_for @configuration_item_relation, {
+            :url => {:controller => 'configuration_item_relations', :action => 'create'},
+            :method => :post, :remote => true, :as => :relation
+          } do |f| %>
+
+  <%= error_messages_for 'configuration_item_relation' %>
+
+  <%= f.hidden_field :element_type, :value => @configuration_item_relation.element.class.to_s %>
+  <%= f.hidden_field :element_id, :value => @configuration_item_relation.element.id %>
+
+  <p>
+    <%= f.text_field :configuration_item_id, :size => 10 %>
+    <%= submit_tag l(:button_add) %>
+    <%= toggle_link l(:button_cancel), 'new-ci-relation-form'%>
+  </p>
+
+<% end %>

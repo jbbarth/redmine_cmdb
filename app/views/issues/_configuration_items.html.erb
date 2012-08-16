@@ -1,23 +1,25 @@
 <% if User.current.allowed_to?(:view_configuration_items, @project) %>
 
-  <% items = ConfigurationItem.related_to(@issue) %>
-  <% if items.present? %>
+  <% @configuration_items = ConfigurationItem.related_to(@issue) %>
+  <% if @configuration_items.present? %>
 
+    <hr/>
     <div id="configuration_items">
       <div class=contextual>
-      <!--
       <% if User.current.allowed_to?(:manage_configuration_items, @project) %>
-        <%= toggle_link l(:button_add), 'new-ci-relation-form', {:focus => 'related_ci_id'} %>
+        <%= toggle_link l(:button_add), 'configuration_item_relation_form', {:focus => 'relation_configuration_item_id'} %>
       <% end %>
-      -->
       </div>
 
       <p><strong><%= l(:configuration_items) %></strong></p>
 
-      <div class="related_configuration_items">
-      <% items.each do |item| %>
-        <%= link_to_item(item) %>
-      <% end %>
+      <div class="related_configuration_items" id="related_configuration_items">
+        <%= render :partial => 'configuration_item_relations/related' %>
+      </div>
+
+      <% @configuration_item_relation ||= ConfigurationItemRelation.new(:element => @issue) %>
+      <div id="configuration_item_relation_form" style="display: none;">
+        <%= render :partial => 'configuration_item_relations/form' %>
       </div>
     </div>
 

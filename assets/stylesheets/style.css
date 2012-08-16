@@ -8,3 +8,4 @@
 .configuration_item:hover .item { background-color:#708eb0; }
 .configuration_item.has-outage .item { padding-right:7px; }
 .configuration_item .outage { margin:0 0 0 -3px; padding:1px 4px 1px 3px; color:#fff !important; background-color:#f33d4c; border-top-right-radius:3px; border-bottom-right-radius:3px; }
+#configuration_items form p { margin-left:15px; }
