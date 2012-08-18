@@ -21,6 +21,14 @@ class ConfigurationItem < ActiveRecord::Base
                                .order('configuration_items.name asc')
                                .map(&:configuration_item)
     end
+
+    def search(term)
+      if term.present?
+        where("LOWER(name) LIKE ?", "%#{term.downcase}%")
+      else
+        scoped
+      end
+    end
   end
 
   def active?

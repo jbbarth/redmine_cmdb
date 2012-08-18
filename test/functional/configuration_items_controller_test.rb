@@ -37,6 +37,16 @@ class ConfigurationItemsControllerTest < ActionController::TestCase
         assert_equal 2, items.count
       end
     end
+
+    context "with search=<mask>" do
+      should "return items with 'mask' in their name" do
+        get :index, :search => "srv-app", :format => :json
+        json = ActiveSupport::JSON.decode(response.body)
+        ids = json['configuration_items'].map{ |item| item["id"] }
+        assert ids.include?("2")
+        assert ! ids.include?("3")
+      end
+    end
   end
 
   context "#destroy" do

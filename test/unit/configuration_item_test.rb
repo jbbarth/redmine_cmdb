@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class ConfigurationItemTest < ActiveSupport::TestCase
+  fixtures :configuration_items
+
   should "create a ConfigurationItem object" do
     ci = ConfigurationItem.new
     assert ! ci.valid?
@@ -75,6 +77,16 @@ class ConfigurationItemTest < ActiveSupport::TestCase
           @ci.destroy('hard')
         end
       end
+    end
+  end
+
+  context ".search" do
+    should "not search pattern if no search pattern is passed" do
+      assert_equal ConfigurationItem.count, ConfigurationItem.search("").count
+    end
+
+    should "limit objects to pattern if any" do
+      assert ConfigurationItem.find(3).in?(ConfigurationItem.search("db"))
     end
   end
 end
