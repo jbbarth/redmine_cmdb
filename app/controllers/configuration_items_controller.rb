@@ -8,8 +8,10 @@ class ConfigurationItemsController < ApplicationController
   accept_api_auth :index, :show, :create, :update, :destroy
 
   def index
+    limit = params[:limit].to_i > 0 ? params[:limit].to_i : nil
+    @configuration_items = self.class.model_object.limit(limit)
     respond_to do |format|
-      format.api { @configuration_items = self.class.model_object.all }
+      format.api
     end
   end
 

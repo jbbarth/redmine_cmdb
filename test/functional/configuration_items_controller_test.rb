@@ -12,6 +12,31 @@ class ConfigurationItemsControllerTest < ActionController::TestCase
   end
 
   context "#index" do
+    context "without parameters" do
+      should "list all records" do
+        get :index, :format => :json
+        assert_response :success
+        assert_equal 'application/json', response.content_type
+
+        json = ActiveSupport::JSON.decode(response.body)
+        items = json['configuration_items']
+        count = ConfigurationItem.count
+        assert count >= 5
+        assert_equal count, items.count
+      end
+    end
+
+    context "with limit=N" do
+      should "limit the number of results to N records" do
+        get :index, :limit => 2, :format => :json
+
+        json = ActiveSupport::JSON.decode(response.body)
+        items = json['configuration_items']
+        count = ConfigurationItem.count
+        assert count >= 5
+        assert_equal 2, items.count
+      end
+    end
   end
 
   context "#destroy" do
