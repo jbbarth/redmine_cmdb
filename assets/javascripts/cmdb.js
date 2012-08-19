@@ -21,6 +21,7 @@ jQuery(function($) {
       formatSearching: function() { return "..." },
       formatNoMatches: function() { return $("#relation_configuration_item_id").data("noMatches") },
       formatResult: function(e) { return e.text },
+      containerCssClass: 'configuration-items-select2',
       zformatSelection: function() { },
       zdropdownCssClass: "bigdrop"
     });
