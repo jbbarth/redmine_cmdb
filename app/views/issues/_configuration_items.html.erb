@@ -7,7 +7,7 @@
     <div id="configuration_items">
       <div class=contextual>
       <% if User.current.allowed_to?(:manage_configuration_items, @project) %>
-        <%= toggle_link l(:button_add), 'configuration_item_relation_form', {:focus => 'relation_configuration_item_id'} %>
+        <%= toggle_link l(:button_edit), 'configuration_item_relation_form', {:focus => 'relation_configuration_item_id'} %>
       <% end %>
       </div>
 
