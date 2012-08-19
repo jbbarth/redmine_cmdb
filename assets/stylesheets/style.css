@@ -1,4 +1,4 @@
-.related_configuration_items { margin-bottom:12px; padding:0 12px; }
+.related_configuration_items { margin-bottom:12px; padding:0 12px; line-height:22px; }
 .configuration_item {
   margin:0 2px; padding:1px 0; border-radius:3px; box-shadow:0 0 4px #ddd;
   font-family:monospace; font-weight:bold; font-size:12px; color:#fff !important;
