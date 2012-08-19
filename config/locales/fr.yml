@@ -3,3 +3,4 @@ fr:
   project_module_cmdb: "Lien avec la CMDB"
   permission_view_configuration_items: "Voir les composants"
   permission_manage_configuration_items: "Gérer les composants"
+  type_some_letters: "Tapez quelques lettres..."
