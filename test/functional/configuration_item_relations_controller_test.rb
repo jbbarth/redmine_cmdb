@@ -24,5 +24,17 @@ class ConfigurationItemRelationsControllerTest < ActionController::TestCase
       assert_equal Issue.find(2), relation.element
       assert_equal 1, relation.configuration_item_id
     end
+
+    should "create multiple ConfigruationItemRelation with xhr" do
+      assert_equal [], ConfigurationItem.related_to(Issue.find(3))
+      assert_difference 'ConfigurationItemRelation.count', 2 do
+        xhr :post, :create, :relation => {
+          :configuration_item_id => '1,2', :element_type => 'Issue', :element_id => '3'
+        }
+      end
+      relations = ConfigurationItemRelation.order(:id).last(2)
+      assert_equal [Issue.find(3)], relations.map(&:element).uniq
+      assert_equal [1,2], relations.map(&:configuration_item_id)
+    end
   end
 end

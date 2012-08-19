@@ -2,6 +2,7 @@ jQuery(function($) {
   window.selectifyConfigurationItemRelation = function() {
     $("#relation_configuration_item_id").select2({
       minimumInputLength: 1,
+      multiple: true,
       ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
         url: '../../configuration_items.json',
         dataType: 'json',
