@@ -13,3 +13,4 @@
 .configuration-items-select2 .select2-choices .select2-search-field input { margin-top:0; padding:3px; }
 .configuration-items-select2 .select2-search input, .configuration-items-select2 .select2-choices { min-height:0 !important; }
 .configuration-items-select2 .select2-search-choice { margin:1px !important; }
+.configuration-items-select2-dropdown .select2-result-sub { padding-left:0; }
