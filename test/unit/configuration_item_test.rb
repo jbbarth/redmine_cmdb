@@ -89,4 +89,15 @@ class ConfigurationItemTest < ActiveSupport::TestCase
       assert ConfigurationItem.find(3).in?(ConfigurationItem.search("db"))
     end
   end
+
+  context ".notin" do
+    should "not bother if no param passed" do
+      assert ConfigurationItem.notin("").count >= 5
+      assert ConfigurationItem.notin.count >= 5
+    end
+
+    should "exclude ids if any" do
+      assert ! ConfigurationItem.find(1).in?(ConfigurationItem.notin("2,1"))
+    end
+  end
 end

@@ -47,6 +47,16 @@ class ConfigurationItemsControllerTest < ActionController::TestCase
         assert ! ids.include?("3")
       end
     end
+
+    context "with not=<id1,id2,...>" do
+      should "not include specified id in results" do
+        assert_equal "srv-app-01", ConfigurationItem.find(1).name
+        get :index, :search => "srv-app", :not => "1,3", :format => :json
+        json = ActiveSupport::JSON.decode(response.body)
+        ids = json['configuration_items'].map{ |item| item["id"] }
+        assert_equal %w(2), ids
+      end
+    end
   end
 
   context "#destroy" do

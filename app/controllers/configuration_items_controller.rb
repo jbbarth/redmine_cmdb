@@ -9,7 +9,9 @@ class ConfigurationItemsController < ApplicationController
 
   def index
     limit = params[:limit].to_i > 0 ? params[:limit].to_i : nil
-    @configuration_items = ConfigurationItem.search(params[:search]).limit(limit)
+    @configuration_items = ConfigurationItem.search(params[:search])
+                                            .notin(params[:not])
+                                            .limit(limit)
     respond_to do |format|
       format.api
     end

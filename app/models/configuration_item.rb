@@ -23,11 +23,11 @@ class ConfigurationItem < ActiveRecord::Base
     end
 
     def search(term)
-      if term.present?
-        where("LOWER(name) LIKE ?", "%#{term.downcase}%")
-      else
-        scoped
-      end
+      term.present? ? where("LOWER(name) LIKE ?", "%#{term.downcase}%") : scoped
+    end
+
+    def notin(ids = "")
+      ids.present? ? where('id NOT IN (?)', ids.split(",")) : scoped
     end
   end
 
