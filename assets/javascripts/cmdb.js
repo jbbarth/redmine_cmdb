@@ -3,8 +3,7 @@ jQuery(function($) {
     $("#relation_configuration_item_id").select2({
       minimumInputLength: 1,
       multiple: true,
-      ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-        url: '../../configuration_items.json',
+      ajax: {
         dataType: 'json',
         data: function (term, page) {
           return { search: term, limit: 10, not: $("#relation_configuration_item_id").data("currentIds") }
