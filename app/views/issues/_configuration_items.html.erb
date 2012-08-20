@@ -1,32 +1,30 @@
 <% if User.current.allowed_to?(:view_configuration_items, @project) %>
 
   <% @configuration_items = ConfigurationItem.related_to(@issue) %>
-  <% if @configuration_items.present? %>
 
-    <hr/>
-    <div id="configuration_items">
-      <div class=contextual>
-      <% if User.current.allowed_to?(:manage_configuration_items, @project) %>
-        <%= toggle_link l(:button_edit), 'configuration_item_relation_form', {:focus => 'relation_configuration_item_id'} %>
-      <% end %>
-      </div>
-
-      <p><strong><%= l(:configuration_items) %></strong></p>
-
-      <div class="related_configuration_items" id="related_configuration_items">
-        <%= render :partial => 'configuration_item_relations/related' %>
-      </div>
-
-      <% @configuration_item_relation ||= ConfigurationItemRelation.new(:element => @issue) %>
-      <div id="configuration_item_relation_form" style="display: none;">
-        <%= render :partial => 'configuration_item_relations/form' %>
-      </div>
+  <hr/>
+  <div id="configuration_items">
+    <div class=contextual>
+    <% if User.current.allowed_to?(:manage_configuration_items, @project) %>
+      <%= toggle_link l(:button_edit), 'configuration_item_relation_form', {:focus => 'relation_configuration_item_id'} %>
+    <% end %>
     </div>
 
-    <% content_for :header_tags do %>
-      <%= stylesheet_link_tag 'style', :plugin => 'redmine_cmdb' %>
-      <%= javascript_include_tag 'cmdb', :plugin => 'redmine_cmdb' %>
-    <% end %>
+    <p><strong><%= l(:configuration_items) %></strong></p>
+
+    <div class="related_configuration_items" id="related_configuration_items">
+      <%= render :partial => 'configuration_item_relations/related' %>
+    </div>
+
+    <% @configuration_item_relation ||= ConfigurationItemRelation.new(:element => @issue) %>
+    <div id="configuration_item_relation_form" style="display: none;">
+      <%= render :partial => 'configuration_item_relations/form' %>
+    </div>
+  </div>
+
+  <% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'style', :plugin => 'redmine_cmdb' %>
+    <%= javascript_include_tag 'cmdb', :plugin => 'redmine_cmdb' %>
   <% end %>
 
 <% end %>
