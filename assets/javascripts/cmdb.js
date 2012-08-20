@@ -7,7 +7,7 @@ jQuery(function($) {
         url: '../../configuration_items.json',
         dataType: 'json',
         data: function (term, page) {
-          return { search: term, limit: 10 }
+          return { search: term, limit: 10, not: $("#relation_configuration_item_id").data("currentIds") }
         },
         results: function (data, page) {
           result = { results: [] }

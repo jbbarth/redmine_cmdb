@@ -11,6 +11,7 @@
   <p>
     <%= f.text_field :configuration_item_id, :style => 'width:280px',
                      :data => { :placeholder => l(:type_some_letters),
+                                :current_ids => @configuration_items.map(&:id).join(","),
                                 :no_matches => l(:label_no_data)
                               } %>
     <%= submit_tag l(:button_add) %>
