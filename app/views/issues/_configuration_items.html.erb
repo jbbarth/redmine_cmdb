@@ -6,14 +6,15 @@
   <div id="configuration_items">
     <div class=contextual>
     <% if User.current.allowed_to?(:manage_configuration_items, @project) %>
-      <%= toggle_link l(:button_edit), 'configuration_item_relation_form', {:focus => 'relation_configuration_item_id'} %>
+      <%= jquery_toggle_link l(:button_edit), '#configuration_item_relation_form,#related_configuration_items',
+                             :focus => '#relation_configuration_item_id' %>
     <% end %>
     </div>
 
     <p><strong><%= l(:configuration_items) %></strong></p>
 
     <div class="related_configuration_items" id="related_configuration_items">
-      <%= render :partial => 'configuration_item_relations/related' %>
+      <p><%= render :partial => 'configuration_item_relations/related' %></p>
     </div>
 
     <% @configuration_item_relation ||= ConfigurationItemRelation.new(:element => @issue) %>

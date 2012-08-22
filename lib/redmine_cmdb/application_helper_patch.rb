@@ -11,4 +11,11 @@ module ApplicationHelper
     end
     link_to(content, item.url, :class => css_classes)
   end
+
+  def jquery_toggle_link(name, id, options={})
+    onclick = "jQuery('#{id}').toggle(0, function() { "
+    onclick << (options[:focus] ? "jQuery('#{options[:focus]}').focus(); " : "jQuery(this).blur(); ")
+    onclick << "}); return false"
+    link_to(name, "#", :onclick => onclick)
+  end
 end

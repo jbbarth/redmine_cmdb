@@ -1,3 +1,9 @@
+<p>
+<% @configuration_items.each do |item| %>
+  <%= link_to_item(item) %>
+<% end %>
+</p>
+
 <%= form_for @configuration_item_relation, {
             :url => {:controller => 'configuration_item_relations', :action => 'create'},
             :method => :post, :remote => true, :as => :relation
@@ -16,7 +22,7 @@
                                 :no_matches => l(:label_no_data)
                               } %>
     <%= submit_tag l(:button_add) %>
-    <%= toggle_link l(:button_cancel), 'configuration_item_relation_form' %>
+    <%= jquery_toggle_link l(:button_cancel), '#configuration_item_relation_form,#related_configuration_items' %>
   </p>
 
 <% end %>

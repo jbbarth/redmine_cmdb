@@ -1,5 +1,4 @@
 jQuery("#relation_configuration_item_id").select2("close")
 jQuery("#related_configuration_items").html("<%= escape_javascript(render("related")) %>")
-jQuery("#relation_configuration_item_id").attr({value: ""})
-jQuery("#configuration_item_relation_form").html("<%= escape_javascript(render("form")) %>").hide()
+jQuery("#configuration_item_relation_form").html("<%= escape_javascript(render("form")) %>")
 selectifyConfigurationItemRelation()
