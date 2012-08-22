@@ -1,4 +1,4 @@
-.related_configuration_items { margin-bottom:12px; padding:0 12px; line-height:22px; }
+.related_configuration_items, #configuration_item_relation_form { margin-bottom:12px; padding:0 12px; line-height:22px; }
 .configuration_item {
   margin:0 2px; padding:1px 0; border-radius:3px;
   font-family:monospace; font-weight:bold; font-size:12px; color:#fff !important;
@@ -9,7 +9,7 @@
 .configuration_item.has-outage .item { padding-right:7px; }
 .configuration_item .outage { margin:0 0 0 -3px; padding:1px 4px 1px 3px; color:#fff !important; background-color:#f33d4c; border-top-right-radius:3px; border-bottom-right-radius:3px; }
 #configuration_items form p { margin-left:15px; }
-#configuration_item_relation_form p > a { position:relative; top:2px; }
+#configuration_item_relation_form input[type=submit] + a { position:relative; top:2px; }
 .configuration-items-select2 .select2-choices .select2-search-field input { margin-top:0; padding:3px; }
 .configuration-items-select2 .select2-search input, .configuration-items-select2 .select2-choices { min-height:0 !important; }
 .configuration-items-select2 .select2-search-choice { margin:1px !important; }
