@@ -1,11 +1,8 @@
 .related_configuration_items, #configuration_item_relation_form { margin-bottom:12px; padding:0 12px; line-height:22px; }
-.configuration_item {
-  margin:0 2px; padding:1px 0; border-radius:3px;
-  font-family:monospace; font-weight:bold; font-size:12px; color:#fff !important;
-}
-.configuration_item .item { margin:0; padding:1px 4px; background-color:#819fc1; color:#fff !important; border-radius:3px; }
+.configuration_item { margin:0 2px; padding:1px 0; border-radius:3px; font-family:"Courier New", Courier, Monaco, monospace; font-weight:bold; font-size:12px; color:#fff !important; }
+.configuration_item .item { margin:0; padding:1px 4px; background-color:#6b90ff; color:#fff !important; border-radius:3px; }
 .configuration_item:hover { text-decoration:none; }
-.configuration_item:hover .item { background-color:#708eb0; }
+.configuration_item:hover .item { background-color:#88b; }
 .configuration_item.has-outage .item { padding-right:7px; }
 .configuration_item .outage { margin:0 0 0 -3px; padding:1px 4px 1px 3px; color:#fff !important; background-color:#f33d4c; border-top-right-radius:3px; border-bottom-right-radius:3px; }
 #configuration_items form p { margin-left:15px; }
