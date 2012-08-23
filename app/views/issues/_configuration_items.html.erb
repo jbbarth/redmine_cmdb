@@ -1,6 +1,6 @@
 <% if User.current.allowed_to?(:view_configuration_items, @project) %>
 
-  <% @configuration_items = ConfigurationItem.related_to(@issue) %>
+  <% @configuration_item_relations = ConfigurationItemRelation.for(@issue) %>
 
   <hr/>
   <div id="configuration_items">

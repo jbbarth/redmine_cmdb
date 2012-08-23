@@ -20,20 +20,9 @@ class IssuesControllerWithCmdbTest < ActionController::TestCase
     @project.enable_module!(:cmdb)
   end
 
-  context "no related configuration item" do
-    should "not show configuration items section" do
-      get :show, :id => 1
-      assert_equal [], ConfigurationItem.related_to(assigns(:issue))
-      assert_no_tag 'strong', :content => 'Configuration items'
-      assert_select 'a.configuration_item', false
-    end
-  end
-
-  context "with some related configuration items" do
-    should "show configuration items section" do
-      get :show, :id => 2
-      assert_tag 'strong', :content => 'Configuration items'
-      assert_select 'a.configuration_item', :count => 1, :text => 'srv-app-01'
-    end
+  should "show configuration items section" do
+    get :show, :id => 2
+    assert_tag 'strong', :content => 'Configuration items'
+    assert_select 'a.configuration_item', :text => 'srv-app-01'
   end
 end

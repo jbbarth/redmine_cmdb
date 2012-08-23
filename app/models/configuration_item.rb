@@ -15,13 +15,6 @@ class ConfigurationItem < ActiveRecord::Base
   scope :active, where(status: STATUS_ACTIVE)
 
   class << self
-    def related_to(element)
-      ConfigurationItemRelation.where(element_type: element.class.to_s, element_id: element.id)
-                               .includes(:configuration_item)
-                               .order('configuration_items.name asc')
-                               .map(&:configuration_item)
-    end
-
     def search(term)
       term.present? ? where("LOWER(name) LIKE ?", "%#{term.downcase}%") : scoped
     end

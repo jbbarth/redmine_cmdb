@@ -1,3 +1,4 @@
-<% @configuration_items.each do |item| %>
-  <%= link_to_item(item) %>
+<% @configuration_item_relations.each do |relation| %>
+  <% item = relation.configuration_item %>
+  <span id="configuration_item_relation_link_<%=relation.id%>"><%= link_to_item(item) %></span>
 <% end %>

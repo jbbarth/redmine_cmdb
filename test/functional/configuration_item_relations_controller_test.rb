@@ -26,7 +26,7 @@ class ConfigurationItemRelationsControllerTest < ActionController::TestCase
     end
 
     should "create multiple ConfigruationItemRelation with xhr" do
-      assert_equal [], ConfigurationItem.related_to(Issue.find(3))
+      assert_equal [], ConfigurationItemRelation.for(Issue.find(3))
       assert_difference 'ConfigurationItemRelation.count', 2 do
         xhr :post, :create, :relation => {
           :configuration_item_id => '1,2', :element_type => 'Issue', :element_id => '3'
@@ -35,6 +35,14 @@ class ConfigurationItemRelationsControllerTest < ActionController::TestCase
       relations = ConfigurationItemRelation.order(:id).last(2)
       assert_equal [Issue.find(3)], relations.map(&:element).uniq
       assert_equal [1,2], relations.map(&:configuration_item_id)
+    end
+  end
+
+  context "#destroy" do
+    should "destroy the requested relation" do
+      assert_difference 'ConfigurationItemRelation.count', -1 do
+        xhr :delete, :destroy, :id => 1
+      end
     end
   end
 end

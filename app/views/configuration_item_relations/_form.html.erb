@@ -1,8 +1,15 @@
-<p>
-<% @configuration_items.each do |item| %>
-  <%= link_to_item(item) %>
-<% end %>
-</p>
+<% @configuration_item_relations.each do |relation|
+%><div class="configuration_item_form" id="configuration_item_relation_form_<%=relation.id%>">
+  <% item = relation.configuration_item %>
+  <p>
+    <%= link_to_item(item) %>
+  </p>
+  <p>
+    <%= link_to_remote(image_tag('delete.png'),
+                       { :url => configuration_item_relation_path(relation), :method => :delete, :confirm => l(:text_are_you_sure) },
+                       :title => l(:label_relation_delete)) %>
+  </p>
+</div><% end %>
 
 <%= form_for @configuration_item_relation, {
             :url => {:controller => 'configuration_item_relations', :action => 'create'},
@@ -18,7 +25,7 @@
     <%= f.text_field :configuration_item_id, :style => 'width:280px',
                      :data => { :placeholder => l(:type_some_letters),
                                 :ajax_url => configuration_items_path(:format=>'json'),
-                                :current_ids => @configuration_items.map(&:id).join(","),
+                                :current_ids => @configuration_item_relations.map(&:configuration_item_id).join(","),
                                 :no_matches => l(:label_no_data)
                               } %>
     <%= submit_tag l(:button_add) %>
