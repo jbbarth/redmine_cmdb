@@ -26,6 +26,7 @@ jQuery(function($) {
       formatResult: function(e) { return e.text },
       containerCssClass: 'configuration-items-select2',
       dropdownCssClass: 'configuration-items-select2-dropdown',
+      closeOnSelect: false,
       zformatSelection: function() { }
     });
   }
