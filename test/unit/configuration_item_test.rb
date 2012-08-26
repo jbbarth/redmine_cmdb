@@ -100,4 +100,33 @@ class ConfigurationItemTest < ActiveSupport::TestCase
       assert ! ConfigurationItem.find(1).in?(ConfigurationItem.notin("2,1"))
     end
   end
+
+  context ".with_status" do
+    should "include active items by default" do
+      items = ConfigurationItem.with_status('active')
+      assert items.include?(ConfigurationItem.find(1))
+      assert ! items.include?(ConfigurationItem.find(5))
+    end
+
+    should "include only archived items if 'archived'" do
+      items = ConfigurationItem.with_status('archived')
+      assert ! items.include?(ConfigurationItem.find(1))
+      assert items.include?(ConfigurationItem.find(5))
+    end
+
+    should "include all items if 'all'" do
+      items = ConfigurationItem.with_status('all')
+      assert items.include?(ConfigurationItem.find(1))
+      assert items.include?(ConfigurationItem.find(5))
+    end
+
+    should "default to active if no keyword or invalid one specified" do
+      items = ConfigurationItem.with_status('blah')
+      assert items.include?(ConfigurationItem.find(1))
+      assert ! items.include?(ConfigurationItem.find(5))
+      items = ConfigurationItem.with_status(nil)
+      assert items.include?(ConfigurationItem.find(1))
+      assert ! items.include?(ConfigurationItem.find(5))
+    end
+  end
 end

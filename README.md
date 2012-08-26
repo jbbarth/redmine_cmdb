@@ -37,6 +37,7 @@ Parameters:
 * **limit=<N>** : limit number of results to N.
 * **search=<term>** : search for "term" in CI name.
 * **not=<id1,id2,...>** : excludes specified ids from the results (mostly useful for internal use).
+* **status=<active|archived|all>** : specify the status of searched items. Defaults to "active".
 
 ### GET /configuration_items/:id.json
 

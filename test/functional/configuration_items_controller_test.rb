@@ -20,8 +20,8 @@ class ConfigurationItemsControllerTest < ActionController::TestCase
 
         json = ActiveSupport::JSON.decode(response.body)
         items = json['configuration_items']
-        count = ConfigurationItem.count
-        assert count >= 5
+        count = ConfigurationItem.active.count
+        assert count >= 4
         assert_equal count, items.count
       end
     end
@@ -55,6 +55,22 @@ class ConfigurationItemsControllerTest < ActionController::TestCase
         json = ActiveSupport::JSON.decode(response.body)
         ids = json['configuration_items'].map{ |item| item["id"] }
         assert_equal %w(2), ids
+      end
+    end
+
+    context "with status=<active|archived|all>" do
+      should "delegate to ConfigurationItem.with_status(blah)" do
+        get :index, :status => 'all', :format => :json
+        json = ActiveSupport::JSON.decode(response.body)
+        ids = json['configuration_items'].map{ |item| item["id"] }
+        count = ConfigurationItem.count
+        assert_equal count, ids.count
+
+        get :index, :status => 'archived', :format => :json
+        json = ActiveSupport::JSON.decode(response.body)
+        ids = json['configuration_items'].map{ |item| item["id"] }
+        assert !ids.include?('1')
+        assert ids.include?('5')
       end
     end
   end

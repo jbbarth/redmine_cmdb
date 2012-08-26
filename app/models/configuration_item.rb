@@ -19,8 +19,19 @@ class ConfigurationItem < ActiveRecord::Base
       term.present? ? where("LOWER(name) LIKE ?", "%#{term.downcase}%") : scoped
     end
 
-    def notin(ids = "")
+    def notin(ids = '')
       ids.present? ? where('id NOT IN (?)', ids.split(",")) : scoped
+    end
+
+    def with_status(status = 'active')
+      case status
+      when 'all'
+        scoped
+      when 'archived'
+        where(status: STATUS_ARCHIVED)
+      else
+        active #scope
+      end
     end
   end
 
