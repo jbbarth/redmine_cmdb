@@ -1,16 +1,19 @@
 .related_configuration_items, #configuration_item_relation_form { margin-bottom:12px; padding:0 12px; line-height:22px; }
-.configuration_item { margin:0 2px; padding:1px 0; border-radius:3px; font-family:"Courier New", Courier, Monaco, monospace; font-weight:bold; font-size:12px; color:#fff !important; }
-.configuration_item .item { margin:0; padding:1px 4px; background-color:#6b90ff; color:#fff !important; border-radius:3px; white-space:nowrap; }
+.configuration_item { margin:0 2px; padding:2px 0 1px; border-radius:3px; font-family:"Courier New", Courier, Monaco, monospace; font-weight:bold; font-size:12px; color:#fff !important;
+                      text-shadow:0 1px 1px rgba(0, 0, 0, 0.25); -webkit-box-shadow:0 0px 2px rgba(0, 0, 0, 0.5); box-shadow:0 0px 2px rgba(0, 0, 0, 0.4) }
+.configuration_item .item { margin:0; padding:2px 5px 1px 5px; background-color:#7788bb; color:#fff !important; border-radius:3px; white-space:nowrap; }
 .configuration_item:hover { text-decoration:none; }
-.configuration_item:hover .item { background-color:#88b; }
+.configuration_item:hover .item { background-color:#8890cd; }
 .configuration_item.has-outage .item { padding-right:7px; }
-.configuration_item .outage { margin:0 0 0 -3px; padding:1px 4px 1px 3px; color:#fff !important; background-color:#f33d4c; border-top-right-radius:3px; border-bottom-right-radius:3px; }
+.configuration_item .outage { margin:0 0 0 -3px; padding:2px 4px 1px 3px; color:#fff !important; background-color:#f33d4c; border-top-right-radius:3px; border-bottom-right-radius:3px; }
 #configuration_items form p { margin:8px 0; }
 #configuration_item_relation_form input[type=submit] + a { position:relative; top:2px; }
 .configuration-items-select2 .select2-choices .select2-search-field input { margin-top:0; padding:3px; }
 .configuration-items-select2 .select2-search input, .configuration-items-select2 .select2-choices { min-height:0 !important; }
 .configuration-items-select2 .select2-search-choice { margin:1px !important; }
 .configuration-items-select2-dropdown .select2-result-sub { padding-left:0; }
-.configuration_item_form { border:1px solid #eec; background-color:#ffe; border-radius:3px; display:inline-block; margin:0 3px 2px -1px; padding:0; }
-.configuration_item_form p { margin:0; }
+.configuration_item_form, .configuration_item_box { border-radius:3px; display:inline-block; margin:0 3px 2px -1px; padding:0; }
+.configuration_item_form { border:1px solid #eec; background-color:#ffe; }
+.configuration_item_box { border:1px solid #ffd; background-color:#ffd; }
+.configuration_item_form p, .configuration_item_box p { margin:0; }
 .configuration_item_form p:last-child { text-align:right; }
