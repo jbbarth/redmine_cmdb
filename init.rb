@@ -19,7 +19,8 @@ Redmine::Plugin.register :redmine_cmdb do
   requires_redmine :version_or_higher => '2.0.0'
   #requires_redmine_plugin :redmine_base_jquery, :version_or_higher => '0.0.1'
   project_module :cmdb do
-    permission :view_configuration_items, {}
-    permission :manage_configuration_items, {}
+    permission :view_configuration_items, { :configuration_items => [:index, :show] }
+    permission :manage_configuration_items, { :configuration_items => [:create, :update, :destroy],
+                                              :configuration_item_relations => [:create, :update, :destroy] }
   end
 end

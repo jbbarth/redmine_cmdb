@@ -4,6 +4,7 @@
 
   <hr/>
   <div id="configuration_items">
+
     <div class=contextual>
     <% if User.current.allowed_to?(:manage_configuration_items, @project) %>
       <%= jquery_toggle_link l(:button_edit), '#configuration_item_relation_form,#related_configuration_items',
@@ -17,10 +18,13 @@
       <p><%= render :partial => 'configuration_item_relations/related' %></p>
     </div>
 
+  <% if User.current.allowed_to?(:manage_configuration_items, @project) %>
     <% @configuration_item_relation ||= ConfigurationItemRelation.new(:element => @issue) %>
     <div id="configuration_item_relation_form" style="display: none;">
       <%= render :partial => 'configuration_item_relations/form' %>
     </div>
+  <% end %>
+
   </div>
 
   <% content_for :header_tags do %>

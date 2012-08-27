@@ -2,8 +2,8 @@ class ConfigurationItemsController < ApplicationController
   unloadable
 
   model_object ConfigurationItem
-  before_filter :require_admin
   before_filter :find_model_object, :only => [:show, :update, :destroy]
+  before_filter :authorize_global
 
   accept_api_auth :index, :show, :create, :update, :destroy
 

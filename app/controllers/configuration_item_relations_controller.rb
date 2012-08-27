@@ -1,6 +1,9 @@
 class ConfigurationItemRelationsController < ApplicationController
   unloadable
 
+  before_filter :find_project_by_project_id
+  before_filter :authorize
+
   def create
     if params[:relation]
       "#{params[:relation][:configuration_item_id]}".strip.split(",").each do |id|

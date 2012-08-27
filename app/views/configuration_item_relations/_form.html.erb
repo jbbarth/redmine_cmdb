@@ -6,13 +6,14 @@
   </p>
   <p>
     <%= link_to_remote(image_tag('delete.png'),
-                       { :url => configuration_item_relation_path(relation), :method => :delete, :confirm => l(:text_are_you_sure) },
+                       { :url => configuration_item_relation_path(relation, :project_id => @project),
+                         :method => :delete, :confirm => l(:text_are_you_sure) },
                        :title => l(:label_relation_delete)) %>
   </p>
 </div><% end %>
 
 <%= form_for @configuration_item_relation, {
-            :url => {:controller => 'configuration_item_relations', :action => 'create'},
+            :url => {:controller => 'configuration_item_relations', :action => 'create', :project_id => @project},
             :method => :post, :remote => true, :as => :relation
           } do |f| %>
 
