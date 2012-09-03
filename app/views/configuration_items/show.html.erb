@@ -1,0 +1,18 @@
+<div class="contextual">
+  <%= link_to t(:open_in_cmdb), @configuration_item.url, :class => 'cmdb-link' %>
+</div>
+<h2><%= @configuration_item.item_type %> <%= @configuration_item.name %></h2>
+
+<div class="splitcontentleft">
+  <% @relations.group_by(&:element_type).each do |type, relations| %>
+    <% raise "Type #{type} not supported in configuration_items/show" if type != "Issue" %>
+    <h3><%= l(:"label_#{type.downcase}_plural") %></h3>
+    <%= render :partial => 'issues/list_simple', :locals => { :issues => relations.map(&:element) } %>
+  <% end %>
+</div>
+
+<%= context_menu issues_context_menu_path %>
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'style', :plugin => 'redmine_cmdb' %>
+  <%= javascript_include_tag 'cmdb', :plugin => 'redmine_cmdb' %>
+<% end %>

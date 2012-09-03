@@ -75,6 +75,17 @@ class ConfigurationItemsControllerTest < ActionController::TestCase
     end
   end
 
+  context "#show" do
+    context "in html format" do
+      should "render a link to CMDB" do
+        get :show, :id => 1
+        assert_template 'configuration_items/show'
+        assert_select 'h2', :text => 'Server srv-app-01'
+        assert_select 'div.contextual a', :text => 'Open in CMDB'
+      end
+    end
+  end
+
   context "#destroy" do
     context "with strategy = hard" do
       should "really delete the record" do

@@ -19,7 +19,9 @@ class ConfigurationItemsController < ApplicationController
   end
 
   def show
+    @relations = ConfigurationItemRelation.where(configuration_item_id: @configuration_item.id)
     respond_to do |format|
+      format.html
       format.api
     end
   end

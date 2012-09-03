@@ -4,3 +4,4 @@ fr:
   permission_view_configuration_items: "Voir les composants"
   permission_manage_configuration_items: "Gérer les composants"
   type_some_letters: "Tapez quelques lettres..."
+  open_in_cmdb: "Ouvrir dans la CMDB"
