@@ -11,12 +11,13 @@ class ConfigurationItemRelationsControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     User.current = nil
     @request.session[:user_id] = 1 # admin ; permission problems are too hard
+    Project.find(1).enable_module!(:cmdb)
   end
 
   context "#create" do
     should "create a new ConfigruationItemRelation with xhr" do
       assert_difference 'ConfigurationItemRelation.count' do
-        xhr :post, :create, :relation => {
+        xhr :post, :create, :project_id => 1, :relation => {
           :configuration_item_id => '1', :element_type => 'Issue', :element_id => '2'
         }
       end
@@ -28,7 +29,7 @@ class ConfigurationItemRelationsControllerTest < ActionController::TestCase
     should "create multiple ConfigruationItemRelation with xhr" do
       assert_equal [], ConfigurationItemRelation.for(Issue.find(3))
       assert_difference 'ConfigurationItemRelation.count', 2 do
-        xhr :post, :create, :relation => {
+        xhr :post, :create, :project_id => 1, :relation => {
           :configuration_item_id => '1,2', :element_type => 'Issue', :element_id => '3'
         }
       end
@@ -40,8 +41,9 @@ class ConfigurationItemRelationsControllerTest < ActionController::TestCase
 
   context "#destroy" do
     should "destroy the requested relation" do
+      ci = ConfigurationItemRelation.first
       assert_difference 'ConfigurationItemRelation.count', -1 do
-        xhr :delete, :destroy, :id => 1
+        xhr :delete, :destroy, :project_id => 1, :id => ci.id
       end
     end
   end
