@@ -7,6 +7,7 @@
   <% @relations.group_by(&:element_type).each do |type, relations| %>
     <% raise "Type #{type} not supported in configuration_items/show" if type != "Issue" %>
     <h3><%= l(:"label_#{type.downcase}_plural") %></h3>
+    <% @extra_fields = %w(assigned last_modified) %>
     <%= render :partial => 'issues/list_simple', :locals => { :issues => relations.map(&:element) } %>
   <% end %>
 </div>
