@@ -1,4 +1,4 @@
-jQuery(function($) {
+$(function() {
   window.selectifyConfigurationItemRelation = function() {
     $("#relation_configuration_item_id").select2({
       minimumInputLength: 1,
