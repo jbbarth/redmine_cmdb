@@ -1,3 +1,3 @@
 var ids = "#configuration_item_relation_form_<%= @relation.id %>"
 ids = ids + ",#configuration_item_relation_box_<%= @relation.id %>"
-jQuery(ids).fadeOut('fast', function() { jQuery(this).remove() })
+$(ids).fadeOut('fast', function() { $(this).remove() })
