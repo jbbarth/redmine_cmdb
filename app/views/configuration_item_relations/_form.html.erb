@@ -24,7 +24,7 @@
   <p>
     <%= f.text_field :configuration_item_id, :style => 'width:280px',
                      :data => { :placeholder => l(:type_some_letters),
-                                :ajax_url => configuration_items_path(:format=>'json'),
+                                :ajax_url => configuration_items_path(:format=>'json', :key=>User.current.api_key),
                                 :current_ids => @configuration_item_relations.map(&:configuration_item_id).join(","),
                                 :no_matches => l(:label_no_data)
                               } %>
