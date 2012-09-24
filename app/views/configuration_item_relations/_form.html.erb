@@ -5,10 +5,9 @@
     <%= link_to_item(item) %>
   </p>
   <p>
-    <%= link_to_remote(image_tag('delete.png'),
-                       { :url => configuration_item_relation_path(relation, :project_id => @project),
-                         :method => :delete, :confirm => l(:text_are_you_sure) },
-                       :title => l(:label_relation_delete)) %>
+    <%= link_to image_tag('delete.png'), configuration_item_relation_path(relation, :project_id => @project),
+                :remote => true, :method => :delete, :data => { :confirm => l(:text_are_you_sure) },
+                :title => l(:label_relation_delete) %>
   </p>
 </div><% end %>
 
