@@ -25,6 +25,13 @@ require 'rubygems'
 require 'httparty'
 require 'pp'
 
+# ----- safety net for current parameters ; remove with care ------
+unless (ENV['CARTOQUE_URL'] && ENV['CARTOQUE_TOKEN'] &&
+        ENV['REDMINE_URL'] && ENV['REDMINE_TOKEN'])
+  $stderr.puts "Error: missing one of CARTOQUE_URL, CARTOQUE_TOKEN, REDMINE_URL, or REDMINE_TOKEN."
+  exit 2
+end
+
 # ----- modify this class with your own CMDB mappings -----
 class CMDBExporter
   include HTTParty
