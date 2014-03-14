@@ -6,7 +6,7 @@
   </p>
   <p>
     <%= link_to image_tag('delete.png'), configuration_item_relation_path(relation, :project_id => @project),
-                :remote => true, :method => :delete, :data => { :confirm => l(:text_are_you_sure) },
+                :remote => true, :method => :delete,
                 :title => l(:label_relation_delete) %>
   </p>
 </div><% end %>
