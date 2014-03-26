@@ -1,9 +1,7 @@
 require_dependency 'application_helper'
 
 module ApplicationHelper
-  def link_to_item(item)
-    outage = ''
-    outage = '5m' if item.name.match(/dev/)
+  def link_to_item(item, outage = '')
     css_classes = 'configuration_item'
     content = content_tag(:span, item.name, :class => 'item')
     if outage.present?

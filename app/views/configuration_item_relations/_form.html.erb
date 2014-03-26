@@ -2,7 +2,7 @@
 %><div class="configuration_item_form" id="configuration_item_relation_form_<%=relation.id%>">
   <% item = relation.configuration_item %>
   <p>
-    <%= link_to_item(item) %>
+    <%= link_to_item(item, relation.downtime) %>
   </p>
   <p>
     <%= link_to image_tag('delete.png'), configuration_item_relation_path(relation, :project_id => @project),

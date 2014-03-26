@@ -2,6 +2,6 @@
 %><div class="configuration_item_box" id="configuration_item_relation_box_<%=relation.id%>">
   <% item = relation.configuration_item %>
   <p>
-    <%= link_to_item(item) %>
+    <%= link_to_item(item, relation.downtime) %>
   </p>
 </div><% end %>
