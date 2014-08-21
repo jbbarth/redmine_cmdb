@@ -18,6 +18,7 @@ Redmine::Plugin.register :redmine_cmdb do
   url 'https://github.com/jbbarth/redmine_cmdb'
   requires_redmine :version_or_higher => '2.0.0'
   #requires_redmine_plugin :redmine_base_jquery, :version_or_higher => '0.0.1'
+  requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.3' if Rails.env.test?
   project_module :cmdb do
     permission :view_configuration_items, { :configuration_items => [:index, :show] }
     permission :manage_configuration_items, { :configuration_items => [:create, :update, :destroy],

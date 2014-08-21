@@ -1,7 +1,7 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'issues_controller'
+require "spec_helper"
 
-class IssuesControllerWithCmdbTest < ActionController::TestCase
+describe IssuesController do
+  render_views
   fixtures :projects, :users, :roles, :members, :member_roles, :issues, :issue_statuses, :versions,
            :trackers, :projects_trackers, :issue_categories, :enabled_modules, :enumerations, :attachments,
            :workflows, :custom_fields, :custom_values, :custom_fields_projects, :custom_fields_trackers,
@@ -10,7 +10,7 @@ class IssuesControllerWithCmdbTest < ActionController::TestCase
 
   include Redmine::I18n
 
-  setup do
+  before do
     @controller = IssuesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
@@ -20,7 +20,7 @@ class IssuesControllerWithCmdbTest < ActionController::TestCase
     @project.enable_module!(:cmdb)
   end
 
-  should "show configuration items section" do
+  it "should show configuration items section" do
     get :show, :id => 2
     assert_tag 'strong', :content => 'Configuration items'
     assert_select 'a.configuration_item', :text => 'srv-app-01'

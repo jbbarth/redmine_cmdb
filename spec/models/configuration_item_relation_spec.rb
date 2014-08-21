@@ -1,9 +1,9 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require "spec_helper"
 
-class ConfigurationItemRelationTest < ActiveSupport::TestCase
+describe "ConfigurationItemRelation" do
   fixtures :configuration_items, :configuration_item_relations, :issues
 
-  should "be able to create a CI relation" do
+  it "should be able to create a CI relation" do
     cir = ConfigurationItemRelation.new
     assert ! cir.valid?
     cir.configuration_item = ConfigurationItem.first
@@ -14,21 +14,21 @@ class ConfigurationItemRelationTest < ActiveSupport::TestCase
   end
 
   context "ConfigurationItemRelation.for" do
-    should "go through each ConfigurationItemRelation an item has" do
+    it "should go through each ConfigurationItemRelation an item has" do
       issue = Issue.find(1)
       server = ConfigurationItem.find(1)
-      assert_equal [], ConfigurationItemRelation.for(issue)
+      ConfigurationItemRelation.for(issue).should == []
       cr = ConfigurationItemRelation.create!(configuration_item: server, element: issue)
-      assert_equal [cr], ConfigurationItemRelation.for(issue)
+      ConfigurationItemRelation.for(issue).should == [cr]
     end
 
-    should "return configuration items ordered by name asc" do
+    it "should return configuration items ordered by name asc" do
       issue = Issue.find(1)
       server = ConfigurationItem.find(1)  #srv-app*
       server2 = ConfigurationItem.find(3) #srv-db*
       cr2 = ConfigurationItemRelation.create!(configuration_item: server2, element: issue)
       cr1 = ConfigurationItemRelation.create!(configuration_item: server, element: issue)
-      assert_equal [cr1, cr2], ConfigurationItemRelation.for(issue)
+      ConfigurationItemRelation.for(issue).should == [cr1, cr2]
     end
   end
 end
