@@ -1,0 +1,8 @@
+# encoding: utf-8
+de:
+  configuration_items: "CMDB Einträge"
+  project_module_cmdb: "CMDB Anbindung"
+  permission_view_configuration_items: "CMDB Einträge anzeigen"
+  permission_manage_configuration_items: "CMDB Einträge verwalten"
+  type_some_letters: "Geben sie einige Buchstaben ein..."
+  open_in_cmdb: "In der CMDB öffnen"
